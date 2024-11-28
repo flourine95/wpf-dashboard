@@ -1,0 +1,7 @@
+﻿.idea/
+.vs/
+.vscode/
+*.user
+*.docx
+bin/
+obj/

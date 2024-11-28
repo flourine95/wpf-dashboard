@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Dashboard.Views.UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Dashboard.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="900" d:DesignWidth="1520">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="USER MANAGEMENT" Margin="0,10,0,0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10" >
+                
+            <Button Content="Create" Command="{Binding CreateCommand}" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Import" Command="{Binding ImportCommand}" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Export" Command="{Binding ExportCommand}" Width="100" />
+            </StackPanel>
+     
+            <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Fullname" Binding="{Binding Fullname}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
+                    <DataGridTextColumn Header="Created at" Binding="{Binding CreatedAt}"/>
+                    <DataGridTextColumn Header="Updated at" Binding="{Binding UpdatedAt}"/>
+                    <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Edit" Command="{Binding EditCommand}" />
+                                    <Button Content="Delete" Command="{Binding DeleteCommand}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Grid Background="#80000000" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <ProgressBar IsIndeterminate="True" Width="100" Height="100"/>
+    </Grid>
+    </Grid>
+</UserControl>

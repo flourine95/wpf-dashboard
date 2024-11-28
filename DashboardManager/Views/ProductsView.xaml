@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="DashboardManager.Views.ProductsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DashboardManager.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Text="Quản lý sản phẩm" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,20"/>
+
+        <!-- Các nút chức năng -->
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal" 
+                    Margin="0,0,0,10">
+            <Button Content="Thêm mới" 
+                    Command="{Binding AddCommand}"
+                    Margin="0,0,10,0"/>
+            <Button Content="Cập nhật" 
+                    Command="{Binding UpdateCommand}"
+                    Margin="0,0,10,0"/>
+            <Button Content="Xóa" 
+                    Command="{Binding DeleteCommand}"
+                    Margin="0,0,10,0"/>
+            <Button Content="Import" 
+                    Command="{Binding ImportCommand}"
+                    Margin="0,0,10,0"/>
+            <Button Content="Export" 
+                    Command="{Binding ExportCommand}"/>
+        </StackPanel>
+
+        <!-- DataGrid hiển thị sản phẩm -->
+        <DataGrid Grid.Row="2"
+                  ItemsSource="{Binding Products}"
+                  SelectedItem="{Binding SelectedProduct}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="False"
+                  Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ProductId}"/>
+                <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Giá" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Thương hiệu" Binding="{Binding Brand.Name}"/>
+                <DataGridTextColumn Header="Danh mục" Binding="{Binding Category.Name}"/>
+                <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedAt}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Phân trang -->
+        <StackPanel Grid.Row="3" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center">
+            <Button Content="Trang trước" 
+                    Command="{Binding PreviousPageCommand}"
+                    Margin="0,0,10,0"/>
+            <Button Content="Trang sau" 
+                    Command="{Binding NextPageCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
